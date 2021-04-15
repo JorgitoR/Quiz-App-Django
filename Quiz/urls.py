@@ -17,9 +17,9 @@ urlpatterns = [
 	path('lista_examen', ListaExamen.as_view(), name='ListaExamen'),
 	path('crear_examen', CrearExamen.as_view(), name='CrearExamen'),
 
-	path('actualizar_examen/<int:pk>', ActualizarExamen.as_view(), name='ActualizarExamen')
+	path('actualizar_examen/<int:pk>', ActualizarExamen.as_view(), name='ActualizarExamen'),
 
-	path('examen/<int:pk>/resultado', ExamenResultado.as_view(), name='ExamenResultado')
+	path('examen/<int:pk>/resultado', ExamenResultado.as_view(), name='ExamenResultado'),
 
 
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.urls import reverse_lazy, reverse
 
 from django.views.generic import (CreateView, ListView, 
 							DeleteView, DetailView, UpdateView)
@@ -26,7 +26,7 @@ def inicio(request):
 		else:
 			return redirect('')
 
-	return render(request, 'inicio.htmls')
+	return render(request, 'inicio.html')
 
 class AdminRegistro(CreateView):
 	model = Usuario

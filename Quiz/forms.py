@@ -3,7 +3,6 @@ from .models import (Usuario, Examen, Categoria, Pregunta, Respuesta,
 					ExamenUsuario, ExamenTomado, RespuestaUsuario)
 
 
-from django.contrib.auth import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.utils import ValidationError
 
