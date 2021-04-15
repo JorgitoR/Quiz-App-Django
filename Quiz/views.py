@@ -19,6 +19,14 @@ from django.utils.decorators import method_decorator
 from django.db.models import Avg, Count
 
 
+def inicio(request):
+	if request.user.is_authenticated:
+		if request.user.admin:
+			return redirect('ListaExamen')
+		else:
+			return redirect('')
+
+	return render(request, 'inicio.htmls')
 
 class AdminRegistro(CreateView):
 	model = Usuario
@@ -33,19 +41,20 @@ class AdminRegistro(CreateView):
 	def form_valid(self, form):
 		usuario = form.save()
 		login(self.request, usuario)
-		return redirect('admin:ListaExamen')
+		return redirect('ListaExamen')
 
 
 class ListaExamen(ListView):
 	model = Examen
 	ordering = ('nombre', )
+	context_object_name = 'examenes'
 	template_name = 'tablero/admin/lista_examen.html'
 
 	def get_queryset(self):
 		queryset = self.request.user.examen \
 			.select_related('categoria') \
 			.annotate(preguntas_count=Count('preguntas', distinct=True)) \
-			.annotate(preguntas_count=Count('examen_tomado', distinct=True))
+			.annotate(tomados_count=Count('examen_tomado', distinct=True))
 		return queryset
 
 @method_decorator([login_required], name='dispatch')

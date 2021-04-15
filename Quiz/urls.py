@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import (
+				inicio,
 				AdminRegistro, 
 				ListaExamen, 
 				CrearExamen,
@@ -11,6 +12,7 @@ from .views import (
 
 urlpatterns = [
 	
+	path('', inicio, name='inicio'),
 	path('registro_admin', AdminRegistro.as_view(), name='AdminRegistro'),
 	path('lista_examen', ListaExamen.as_view(), name='ListaExamen'),
 	path('crear_examen', CrearExamen.as_view(), name='CrearExamen'),

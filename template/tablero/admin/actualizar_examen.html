@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<nav arial-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active">
+			<a href="{% url 'ListaExamen' %}">
+				Mis Examenes
+			</a>
+		</li>
+		<li class="breadcrumb-item active">
+			{{examen.nombre}}
+		</li>
+	</ol>
+</nav>
+
+<h2 class="mb-3">
+	{{examen.nombre}}
+	<a href="{% url 'ExamenResultado' examen.pk %}">
+ 		Ver resultados
+	</a>
+</h2>
+
+<div class="row mb-3">
+	<div class="col-md-6 col-sm-8 col-12">
+		<form method="post">
+			{% csrf_token %}
+			{{form}}
+			<button type="submit" class="btn btn-succes">
+				Guardar Cambios
+			</button>
+		</form>
+	</div>
+</div>
+
+<div class="card">
+	<div class="card-header">
+		<div class="row">
+			<div class="col-10">
+				<strong>
+					Preguntas
+				</strong>
+			</div>
+			<div class="col-2">
+				<strong>
+					Respuestas
+				</strong>
+			</div>
+		</div>
+	</div>
+
+<div class="list-group list-group-flush list-group-formset">
+	{% for pregunta in  preguntas %}
+
+		<div class="list-group-item">
+			<div class="row">
+				<div class="col-10">
+					<a href="{% url '' %}">
+						{{pregunta.texto}}
+					</a>
+				</div>
+				<div class="col-2">
+					{{pregunta.respuesta_count}}
+				</div>
+			</div>
+		</div>
+
+	{% empty %}
+	<div class="list-group-item text-center">
+		<p class="text-muted font-italic mb-0">
+			Tu no has creado preguntas aun. Vamos adelante <a href="">
+				Añadir la primera pregunta
+			</a>
+		</p>
+	</div>
+	{% endfor %}
+</div>
+<div class="card-footer">
+	<a href="">
+		Añadir preguntas
+	</a>
+</div>
+
+</div>
+
+{% endfor %}

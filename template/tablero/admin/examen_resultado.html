@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<nav arial-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active">
+			<a href="{% url 'ListaExamen' %}">
+				Mis Examenes
+			</a>
+		</li>
+
+		<li class="breadcrumb-item active">
+			<a href="{% url 'ActualizarExamen' examen.pk %}">
+				{{examen.nombre}}
+			</a>
+		</li>
+
+		<li class="breadcrumb-item active">
+			Resultados
+		</li>
+	</ol>
+</nav>
+
+<h2 class="mb-3">
+	{{examen.nombre}} Resultados
+</h2>
+
+
+<div class="card">
+	<div class="card-header">
+		<strong>
+			Examenes Tomados
+		</strong>
+		<span class="badge badge-pill badge-primary float-rigth">
+			Puntaje promedio: {{examen_puntaje.average_score|default_if_none:0.0}}
+		</span>
+	</div>
+	<table class="table mb-0">
+		<thead>
+			<tr>
+				<th>
+					Persona
+				</th>
+				<th>
+					Fecha 
+				</th>
+				<th>
+					Puntaje
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for examen_tomado in examenes_tomados %}
+			<tr>
+				<td>{{examen_tomado.quizuser.usuario.username}}</td>
+				<td>{{examen_tomado.fecha|naturaltime}}</td>
+				<td>{{examen_tomado.puntaje}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div class="card-footer text-muted">
+		Total respondidos: <strong>{{total_examenes_tomados}}</strong>
+	</div>
+</div>
+
+{% endblock %}

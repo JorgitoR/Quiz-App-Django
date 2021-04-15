@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+    <section id="section-jumbotron" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
+      <div class="container text-center">
+        <h1 class="display-1 text-info">Hagamos un Quiz</h1>
+        <p class="display-4 d-none d-sm-block">Pon a prueba tus habilidades y conviértete en un maestro.</p>
+        <p class="lead">Organizamos cuestionarios sobre varios temas..</p>
+
+        {% if not request.user.is_active %}
+
+        <p class="lead">Regístrese si aún no lo ha hecho y obtenga acceso a millones de cuestionarios sobre el tema de su interés..</p>
+        <p><strong> Comience su viaje aquí: Inscribirse</strong></p>
+        <a href="{% url 'AdminRegistro' %}" class="btn btn-lg btn-info mt-1"><i class="fa fa-user-plus" aria-hidden="true"></i> Registrate</a>
+
+        {% else %}
+        
+        <a href="{% url 'ListaExamen' %}" class="btn btn-lg btn-info mt-1">Lista de Quiz</a>
+        {% endif %}
+      </div>  
+    </section>
+
+{% endblock %}

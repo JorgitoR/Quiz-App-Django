@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+      	<a href="{% url 'ListaExamen' %}">
+      		Mis Examenes
+      	</a>
+      </li>
+      <li class="breadcrumb-item">
+      	<a href="{% url 'ActualizarExamen' examen.pk %}">
+      		{{ examen.nombre }}
+      	</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Confirmar</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">Confirmar accion</h2>
+  <p class="lead">Estas seguro que deseas eliminar el examen <strong>"{{ examen.nombre }}"</strong>? No har forma de volver atras?.</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-lg">Si, estoy seguro</button>
+    <a href="{% url 'ActualizarExamen' examen.pk %}" class="btn btn-outline-secondary btn-lg" role="button">No, Go Back</a>
+  </form>
+
+{% endfor %}

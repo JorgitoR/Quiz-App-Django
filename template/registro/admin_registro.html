@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="row">
+	<div class="col-md-8 col-sm-10 col-12">
+		<h2>
+			Registrate como {{}}
+		</h2>
+		<form method="post">
+			{% csrf_token %}
+			{{form}}
+			<button type="submit" class="btn btn-success">
+				Registrate
+			</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<nav arial-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active">
+			Mis Examenes
+		</li>
+	</ol>
+</nav>
+
+<h2 class="mb-3">
+	Mis Examenes
+</h2>
+
+<a href="{% url 'crear_examen' %}">Añadir Examen</a>
+
+
+<div class="card">
+
+<table class="table mb-0">
+	<thead>
+		<tr>
+			<th>
+				Examen
+			</th>
+			<th>
+				Categoria
+			</th>
+			<th>
+				Preguntas
+			</th>
+			<th>
+				Examen Tomado
+			</th>
+			<th>
+				
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for examen in examenes %}
+
+		<tr>
+			<td class="align-middle">
+				<a href="{% url 'actualizar_examen'  examen.pk%}">
+					{{examen.nombre}}
+				</a>
+			</td>
+			<td class="align-middle">
+				{{examen.categoria}}
+			</td>
+			<td class="align-middle">
+				{{examen.preguntas_count}}
+			</td>
+			<td class="align-middle">
+				{{examen.tomados_count}}
+			</td>
+			<td class="text-right">
+				<a href="{% url 'ExamenResultado' examen.pk %}">Ver resultados</a>
+			</td>
+		</tr>
+
+		{% empty %}
+
+		<tr>
+			<td class="big-light text-center font-italic">
+				Aun no has creado examen
+			</td>
+		</tr>
+
+		{% endfor %}
+	</tbody>
+</table>
+	
+</div>
+
+{% endblock %}
