@@ -57,7 +57,12 @@ class ExamenUsuario(models.Model):
 			.filter(respuesta__pregunta__examen=examen) \
 			.values_list('respuesta__pregunta__pk', flat=True)
 
+		preguntas =  examen.preguntas.exclude(pk__in=preguntas_respondidas).order_by('texto')
 
+		return preguntas
+
+	def __str__(self):
+		return self.usuario.username
 
 class ExamenTomado(models.Model):
 	quizUser = models.ForeignKey(ExamenUsuario, on_delete=models.CASCADE, related_name='examen_tomado')
