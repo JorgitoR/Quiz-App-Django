@@ -14,7 +14,7 @@
 	Mis Examenes
 </h2>
 
-<a href="{% url 'crear_examen' %}">Añadir Examen</a>
+<a href="{% url 'CrearExamen' %}">Añadir Examen</a>
 
 
 <div class="card">
@@ -44,7 +44,7 @@
 
 		<tr>
 			<td class="align-middle">
-				<a href="{% url 'actualizar_examen'  examen.pk%}">
+				<a href="{% url 'ActualizarExamen'  examen.pk%}">
 					{{examen.nombre}}
 				</a>
 			</td>

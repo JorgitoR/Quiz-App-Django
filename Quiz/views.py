@@ -68,7 +68,7 @@ class CrearExamen(CreateView):
 		examen.usuario = self.request.user
 		examen.save()
 		messages.success(self.request, 'El examen fue creado exitosamente! Sigue adelante, agrega las preguntas')
-		return redirect('admin:ActualizarExamen')
+		return redirect('ActualizarExamen', examen.pk)
 
 
 @method_decorator([login_required], name='dispatch')
@@ -92,7 +92,7 @@ class ActualizarExamen(UpdateView):
 
 		'''
 
-		return self.request.user.examenes.all()
+		return self.request.user.examen.all()
 
 	def get_success_url(self):
 		return reverse('ActualizarExamen', kwargs={'pk': self.object.pk})
@@ -112,7 +112,7 @@ class ExamenEliminar(DeleteView):
 		return super().delete(request, *args, **kwargs)
 
 	def get_queryset(self):
-		return self.request.user.examenes.all()
+		return self.request.user.examen.all()
 
 
 
@@ -140,4 +140,4 @@ class ExamenResultado(DeleteView):
 		return super().get_context_data(**kwargs)
 
 	def get_queryset(self):
-		return self.request.user.examenes.all()
+		return self.request.user.examen.all()
