@@ -166,7 +166,7 @@ def add_preguntas(request, pk):
 		'quiz':quiz
 	}
 
-	return render(request, '', context)
+	return render(request, 'tablero/admin/add_preguntas.html', context)
 
 
 
@@ -202,3 +202,13 @@ def add_respuestas(request, examen_id, pregunta_id):
 		form = AddPreguntaForm(instance=pregunta)
 		formset = RespuestaFormSet(instance=pregunta)
 
+	context = {
+
+		'form':form,
+		'formset':formset,
+		'pregunta':pregunta,
+		'quiz':quiz
+
+	}
+
+	return render(request, 'tablero/admin/add_respuestas.html', context)

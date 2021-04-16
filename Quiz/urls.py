@@ -9,6 +9,7 @@ from .views import (
 				ExamenResultado,
 
 				add_preguntas,
+				add_respuestas
 
 		)
 
@@ -25,6 +26,7 @@ urlpatterns = [
 
 
 	path('examen/<int:pk>/add_preguntas', add_preguntas, name='add_preguntas'),
+	path('examen/<int:examen_id>/pregunta/<int:pregunta_id>/', add_respuestas, name='add_respuestas'),
 
 
 ]
