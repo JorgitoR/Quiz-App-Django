@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #aplicaciones de tercero
+    'crispy_forms',
 
-    'Quiz'
+    'Quiz',
 ]
 
 MIDDLEWARE = [
