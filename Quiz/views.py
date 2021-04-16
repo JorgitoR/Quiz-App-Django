@@ -161,7 +161,7 @@ def add_preguntas(request, pk):
 			instance.examen= quiz
 			instance.save()
 			messages.success(request, 'Ahora debes agregar las opciones de respuestas a la pregunta')
-			return redirect('addRespuestas', quiz.pk, instance.pk)
+			return redirect('add_respuestas', quiz.pk, instance.pk)
 
 	else:
 		form = AddPreguntaForm()

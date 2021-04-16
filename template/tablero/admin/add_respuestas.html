@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags  crispy_forms_filters %}
+
+{% block contenido %}
+<nav arial-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active">
+			<a href="{% url 'ListaExamen' %}">
+				Mis Examenes
+			</a>
+		</li>
+		<li class="breadcrumb-item active">
+			{{quiz.nombre}}
+		</li>
+		<li class="breadcrumb-item active" aria-current="page">
+			{{pregunta.texto}}
+		</li>
+	</ol>
+</nav>
+
+<h2 class="mb-3">
+	{{pregunta.texto}}
+</h2>
+
+<form method="post">
+	
+	{% csrf_token %}
+	{{formset.management_form}}
+	{{form|crispy}}
+
+	<div class="card mb-3{% if formset.errors %} border-danger {% endif %}">
+		<div class="card-header">
+			<div class="row">
+				<div class="col-8">
+					<strong>Respuestas</strong>
+				</div>
+				<div class="col-2">
+					<strong>¿Correcta?</strong>
+				</div>
+				<div class="col-2">
+					<strong>Eliminar</strong>
+				</div>
+			</div>
+		</div>
+		{% for error in formset.non_form_errors %}
+		<div class="card-body bg-danger border-danger text-white py-2">
+			{{error}}
+		</div>
+		{% endfor %}
+
+		<div class="list-group list-group-flush list-group-formset">
+			{% for form in formset %}
+			<div class="list-group-item">
+				<div class="row">
+					<div class="col-8">
+						{% for ocultar in form.hidden_fields %}
+							{{ocultar}}
+						{% endfor %}
+						{{form.texto|as_crispy_field}}
+						{% if form.instance.pk and form.texto.value != form.instance.texto %}
+						<p class="mb-0 mt-1">
+							<small class="text-muted fon-italic">
+								<strong>
+									Resputa Antigua:
+								</strong> {{form.instance.texto}}
+							</small>
+						</p>
+						{% endif %}
+					</div>
+					<div class="col-2">
+						{{form.correcta}}
+					</div>
+					<div class="col-2">
+						{% if form.instance.pk %}
+							{{form.DELETE}}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<p>
+		<small class="form.text text-muted">
+			Tus preguntas debe tener al menos <strong>2</strong> respuesta y
+			un maximo de <strong>10</strong> respuestas. Seleciona al menos una 
+			respuesta correcta
+		</small>
+	</p>
+
+	<button type="submit" class="btn btn-success">
+		Guardar Cambios
+	</button>
+
+</form>
+
+{% endblock %}
