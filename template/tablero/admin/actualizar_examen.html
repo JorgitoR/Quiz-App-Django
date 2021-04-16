@@ -71,7 +71,7 @@
 	{% empty %}
 	<div class="list-group-item text-center">
 		<p class="text-muted font-italic mb-0">
-			Tu no has creado preguntas aun. Vamos adelante <a href="">
+			Tu no has creado preguntas aun. Vamos adelante <a href="{% url 'add_preguntas' examen.pk %}">
 				Añadir la primera pregunta
 			</a>
 		</p>
@@ -79,7 +79,7 @@
 	{% endfor %}
 </div>
 <div class="card-footer">
-	<a href="">
+	<a href="{% url 'add_preguntas' examen.pk %}">
 		Añadir preguntas
 	</a>
 </div>

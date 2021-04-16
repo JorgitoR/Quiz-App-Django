@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+
+<nav arial-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active">
+			<a href="{% url 'ListaExamen' %}">
+				Mis Examenes
+			</a>
+		</li>
+		<li class="breadcrumb-item active">
+			{{quiz.nombre}}
+		</li>
+		<li class="breadcrumb-item active" aria-current="page">
+			Añadir una nueva pregunta
+		</li>
+	</ol>
+</nav>
+
+<h2 class="mb-3">
+	Añadir una nueva pregunta
+</h2>
+
+<p class="lead">
+	<strong>Primer paso:</strong> Añadir el texto de la pregunta
+</p>
+<p class="lead">
+	<strong>Segundo paso:</strong> Añadir las posibles respuestas
+</p>
+
+<form method="post" novalidate>
+	{% csrf_token %}
+	{{form|crispy}}
+	<button type="submit" class="btn btn-success">
+		Guardar
+	</button>
+	
+</form>
+
+{% endblock %}

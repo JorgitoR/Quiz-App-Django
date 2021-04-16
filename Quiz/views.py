@@ -4,7 +4,12 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import (CreateView, ListView, 
 							DeleteView, DetailView, UpdateView)
 
-from .forms import AdminRegistro, PersonalRegistro, BaseRespuestasInlinesFormSet
+from .forms import (AdminRegistro, 
+					PersonalRegistro, 
+					BaseRespuestasInlinesFormSet,
+					AddPreguntaForm)
+
+
 from django.forms import inlineformset_factory
 from .models import (Usuario, Examen, Categoria, Pregunta, Respuesta, 
 					ExamenUsuario, ExamenTomado, RespuestaUsuario)
