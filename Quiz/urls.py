@@ -6,7 +6,9 @@ from .views import (
 				ListaExamen, 
 				CrearExamen,
 				ActualizarExamen,
-				ExamenResultado
+				ExamenResultado,
+
+				add_preguntas,
 
 		)
 
@@ -20,6 +22,9 @@ urlpatterns = [
 	path('actualizar_examen/<int:pk>', ActualizarExamen.as_view(), name='ActualizarExamen'),
 
 	path('examen/<int:pk>/resultado', ExamenResultado.as_view(), name='ExamenResultado'),
+
+
+	path('examen/<int:pk>/add_preguntas', add_preguntas.as_view(), name='add_preguntas'),
 
 
 ]

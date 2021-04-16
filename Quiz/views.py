@@ -5,6 +5,7 @@ from django.views.generic import (CreateView, ListView,
 							DeleteView, DetailView, UpdateView)
 
 from .forms import AdminRegistro, PersonalRegistro
+from django.forms import inlineformset_factory
 from .models import (Usuario, Examen, Categoria, Pregunta, Respuesta, 
 					ExamenUsuario, ExamenTomado, RespuestaUsuario)
 
@@ -141,3 +142,42 @@ class ExamenResultado(DeleteView):
 
 	def get_queryset(self):
 		return self.request.user.examen.all()
+
+
+@login_required
+def add_preguntas(request, pk):
+
+	quiz = get_object_or_404(Examen, pk=pk)
+
+	if request.method == 'POST':
+		form = AddPreguntaForm(request.POST or None)
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.examen= quiz
+			instance.save()
+			messages.success(request, 'Ahora debes agregar las opciones de respuestas a la pregunta')
+			return redirect('addRespuestas', quiz.pk, instance.pk)
+
+	else:
+		form = AddPreguntaForm()
+
+	context = {
+		'form':form,
+		'quiz':quiz
+	}
+
+	return render(request, '', context)
+
+
+
+def add_respuestas(request, examen_id, pregunta_id):
+
+	quiz = get_object_or_404(Examen, pk=examen_id)
+	pregunta = get_object_or_404(Pregunta, pk=pregunta_id, examen=quiz)
+
+	RespuestaFormSet = inlineformset_factory(
+
+		Pregunta,
+		
+
+	)

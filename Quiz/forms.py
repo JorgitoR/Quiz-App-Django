@@ -7,6 +7,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms.utils import ValidationError
 
 
+
+class AddPreguntaForm(forms.ModelForm):
+	class Meta:
+		model = Pregunta
+		fields = [
+			'texto'
+		]
+
 class AdminRegistro(UserCreationForm):
 
 	class Meta(UserCreationForm.Meta):
