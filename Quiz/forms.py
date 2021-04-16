@@ -50,3 +50,18 @@ class PersonalRegistro(UserCreationForm):
 		examenUsuario.categorias.add(*self.cleaned_data.get('dependencias'))
 		return usuario
 
+
+
+class BaseRespuestasInlinesFormSet(forms.BaseInlineFormSet):
+	def clean(self):
+		super().clean()
+
+		respuestas_correcta_respondida = False
+		for form in self.forms:
+			if not form.cleaned_data.get('DELETE', False):
+				if form.cleaned_data.get('correcta', False):
+					respuestas_correcta_respondida = True
+					break
+
+		if not respuestas_correcta_respondida:
+			raise ValidationError('Marca al menos una respuesta Correcta', code='sin_respuesta')

@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import (CreateView, ListView, 
 							DeleteView, DetailView, UpdateView)
 
-from .forms import AdminRegistro, PersonalRegistro
+from .forms import AdminRegistro, PersonalRegistro, BaseRespuestasInlinesFormSet
 from django.forms import inlineformset_factory
 from .models import (Usuario, Examen, Categoria, Pregunta, Respuesta, 
 					ExamenUsuario, ExamenTomado, RespuestaUsuario)
@@ -18,7 +18,7 @@ from django.utils.decorators import method_decorator
 
 
 from django.db.models import Avg, Count
-
+from django.db import transaction
 
 def inicio(request):
 	if request.user.is_authenticated:
@@ -177,7 +177,28 @@ def add_respuestas(request, examen_id, pregunta_id):
 
 	RespuestaFormSet = inlineformset_factory(
 
-		Pregunta,
-		
+		Pregunta, #Modelo padre
+		Respuesta, #Modelo base
+		formset = BaseRespuestasInlinesFormSet,
+		fields = ('texto', 'correcta'),
+		min_num=2,
+		validate_min=True,
+		max_num=10,
+		validate_max=True,
 
 	)
+
+	if request.method=='POST':
+		form = AddPreguntaForm(request.POST, instance=pregunta)
+		formset = RespuestaFormSet(request.POST, instance=pregunta)
+		if form.is_valid() and formset.is_valid():
+			with transaction.atomic():
+				form.save()
+				formset.save()
+			messages.success(request, 'Pregunta y respuestas guardadas con exito')
+			return redirect('ActualizarExamen', quiz.pk)
+
+	else:
+		form = AddPreguntaForm(instance=pregunta)
+		formset = RespuestaFormSet(instance=pregunta)
+
