@@ -21,3 +21,16 @@ Aprende a crear una app avanzada de Quiz con Django - Python.
   </li>
   
 </ol>
+
+
+<p>
+  <strong>
+    Caracteristicas
+  </strong>
+</p>
+
+
+<img src="">
+
+
+
