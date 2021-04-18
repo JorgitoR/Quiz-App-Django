@@ -16,3 +16,17 @@ from .models import (Usuario, Examen, Categoria, Pregunta, Respuesta,
 
 
 from .forms import PersonalRegistro, CategoriaForms
+
+class PersonalRegistro(CreateView):
+	model = Usuario
+	form_class = PersonalRegistro
+	template_name= 'registro/formulario.html'
+
+	def get_context_data(self, **kwargs):
+		kwargs['tipo_usuario'] = "Persona"
+		return super().get_context_data(**kwargs)
+
+	def form_valid(self, form):
+		usuario = form.save()
+		login(self.request, usuario)
+		return redirect('')
