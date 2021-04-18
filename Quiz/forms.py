@@ -15,6 +15,16 @@ class AddPreguntaForm(forms.ModelForm):
 			'texto'
 		]
 
+class CategoriaForms(forms.ModelForm):
+	class Meta:
+		model = Categoria
+		fields = [
+			"nombre",
+		]
+		widget = {
+			'nombre':forms.CheckboxSelectMultiple
+		}
+
 class AdminRegistro(UserCreationForm):
 
 	class Meta(UserCreationForm.Meta):
