@@ -1,5 +1,5 @@
 # Aplicativo avanzado de Quiz con Django - Python
-Aprende a crear una app avanzada de Quiz con Django - Python.
+Aprende a crear una app avanzada de Quiz con Django - Python. En esta aplicacion los Admin pueden crear cuestionario y el personal pueden realizar cuestionario relacionados con su interes
 
 <p>
   <strong>
@@ -29,8 +29,14 @@ Aprende a crear una app avanzada de Quiz con Django - Python.
   </strong>
 </p>
 
+El usuario registrado como Admin podra desarrollar los Quiz o Examenes, y visualizarlos.
+<img src="https://i.ibb.co/SfZQNcr/lista-1.jpg">
 
-<img src="">
+Cada Examen, contiene ilimitadas Preguntas relacionados al Examen 
+<img src="https://i.ibb.co/2KyL8md/preguntas-1.jpg">
+
+Cada pregunta contiene sus posibles opciones de respuestas
+<img src="https://i.ibb.co/jL9hrgF/respuesta-1.jpg">
 
 
 
