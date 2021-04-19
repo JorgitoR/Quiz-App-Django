@@ -75,3 +75,26 @@ class BaseRespuestasInlinesFormSet(forms.BaseInlineFormSet):
 
 		if not respuestas_correcta_respondida:
 			raise ValidationError('Marca al menos una respuesta Correcta', code='sin_respuesta')
+
+
+class TomarQuizForm(forms.ModelForm):
+
+	respuesta = forms.ModelChoiceField(
+
+		queryset = Respuesta.objects.none(),
+		widget = forms.RadioSelect(),
+		required = True,
+		empty_label = None
+
+	)
+
+	class Meta:
+		model = RespuestaUsuario
+		fields = [
+			"respuesta",
+		]
+
+	def __init__(self, *args, **kwargs):
+		pregunta = kwargs.pop('pregunta')
+		super().__init__(*args, **kwargs)
+		self.fields['respuesta'].queryset = pregunta.respuesta.order_by('texto')

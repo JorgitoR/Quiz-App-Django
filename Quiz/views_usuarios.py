@@ -16,7 +16,7 @@ from .models import (Usuario, Examen, Categoria, Pregunta, Respuesta,
 					ExamenUsuario, ExamenTomado, RespuestaUsuario)
 
 
-from .forms import PersonalRegistro, CategoriaForms
+from .forms import PersonalRegistro, CategoriaForms, TomarQuizForm
 
 class PersonalRegistro(CreateView):
 	model = Usuario
@@ -90,5 +90,12 @@ def  jugar(request, quiz):
 	total_preguntas_sin_responder = preguntas_sin_responder.count()
 	barra_de_progreso = 100 - round(((total_preguntas_sin_responder - 1) / total_preguntas)*100)
 
-	
+	pregunta = preguntas_sin_responder.first()
+
+	if request.method == 'POST':
+		form = TomarQuizForm(pregunta=pregunta, data=request.POST)
+		if form.is_valid():
+			
+
+
 
