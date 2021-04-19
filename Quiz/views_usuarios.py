@@ -46,4 +46,20 @@ class ActualizarInteres(UpdateView):
 	def form_valid(self, form):
 		messages.success(self.request, 'Categoria actualizado correctamente')
 		return super().form_valid(form)
-		
+
+
+class ListaExamenes(ListView):
+	model = Examen
+	ordering = ('nombre',)
+	context_object_name = 'examenes'
+	template_name = 'tablero/personal/lista_quiz.html'
+
+	def get_queryset(self):
+		estudiante = self.request.user.examenusuario
+		categoria = estudiante.categorias.values_list('pk', flat=True)
+		examen_tomado = estudiante.examenes.values_list('pk', flat=True)
+		queryset = Examen.objects.filter(categoria__in=categoria) \
+				.exclude(pk__in=examen_tomado) \
+				.annotate(preguntas__count=Count('preguntas')) \
+				.filter(preguntas__count__gt=0)
+		return queryset
