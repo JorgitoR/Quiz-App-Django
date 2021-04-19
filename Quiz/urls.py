@@ -17,7 +17,8 @@ from .views import (
 from .views_usuarios import (
 
 			PersonalRegistro,
-			ActualizarInteres
+			ActualizarInteres,
+			ListaExamenes
 
 		)
 

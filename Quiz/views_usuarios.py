@@ -3,7 +3,6 @@ from django.urls import reverse_lazy
 
 from django.contrib import messages
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.db.models import Count
 
@@ -11,8 +10,7 @@ from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from django.views.generics import CreateView, ListView, UpdateView
-from django.utils.decorators import method_decoratos
+from django.views.generic import CreateView, ListView, UpdateView
 
 from .models import (Usuario, Examen, Categoria, Pregunta, Respuesta, 
 					ExamenUsuario, ExamenTomado, RespuestaUsuario)
@@ -62,4 +60,17 @@ class ListaExamenes(ListView):
 				.exclude(pk__in=examen_tomado) \
 				.annotate(preguntas__count=Count('preguntas')) \
 				.filter(preguntas__count__gt=0)
+		return queryset
+
+
+class ExamenTomado(ListView):
+	model = ExamenTomado
+	context_object_name = 'examen_tomado'
+	template_name = 'tablero/personal/lista_examen_tomado.html'
+
+
+	def get_queryset(self):
+		queryset = self.request.user.examenusuario.examen_tomado \
+			.select_related('examen', 'examen__categoria') \
+			.order_by('examen__nombre')
 		return queryset
