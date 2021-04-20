@@ -53,7 +53,7 @@ class ExamenUsuario(models.Model):
 	categorias = models.ManyToManyField(Categoria, related_name='categorias')
 
 	def get_preguntas_sin_respuestas(self, examen):
-		preguntas_respondidas = self.examen_tomado \
+		preguntas_respondidas = self.respuesa_examen \
 			.filter(respuesta__pregunta__examen=examen) \
 			.values_list('respuesta__pregunta__pk', flat=True)
 

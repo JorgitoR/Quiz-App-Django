@@ -95,7 +95,32 @@ def  jugar(request, quiz):
 	if request.method == 'POST':
 		form = TomarQuizForm(pregunta=pregunta, data=request.POST)
 		if form.is_valid():
-			
+			with transaction.atomic():
+				instance = form.save(commit=False)
+				instance.quizuser = estudiante
+				instance.save()
+
+				if estudiante.get_preguntas_sin_respuestas(quiz):
+					return redirect('jugar', pk)
+				else:
+					respuesta_correcta = estudiante.respuesa_examen.filter(respuesta__pregunta__examen=quiz, respuesta__correcta=True).count()
+					puntaje = round((respuesta__correcta / total_preguntas) * 100)
+					ExamenTomado.objects.create(quizuser=estudiante, examen=quiz, puntaje=puntaje)
+					if puntaje < 50.0:
+						messages.warning(request, 'Mejor suerte la proxima vez! Tu puntaje para el Quiz %s  fue %s' %(quiz.nombre, puntaje))
+					else:
+						messages.success(request, 'Felicitaciones! Tu puntaje para el Quiz %s  fue %s' %(quiz.nombre, puntaje))
+
+					return redirect('ListaExamenes')
+
+	else:
+		form = TomarQuizForm(pregunta=pregunta)
+
+	context = {
+
+	}
+
+	return render(request, '', context)
 
 
 

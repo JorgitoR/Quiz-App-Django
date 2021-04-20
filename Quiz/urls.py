@@ -18,7 +18,9 @@ from .views_usuarios import (
 
 			PersonalRegistro,
 			ActualizarInteres,
-			ListaExamenes
+			ListaExamenes,
+			ExamenTomado,
+			jugar
 
 		)
 
@@ -37,6 +39,17 @@ urlpatterns = [
 
 	path('examen/<int:pk>/add_preguntas', add_preguntas, name='add_preguntas'),
 	path('examen/<int:examen_id>/pregunta/<int:pregunta_id>/', add_respuestas, name='add_respuestas'),
+
+
+
+	#########ESTUIANTE############
+
+	path('registro_estudiante', PersonalRegistro.as_view(), name='PersonalRegistro'),
+	path('ActualizarInteres', ActualizarInteres.as_view(), name='ActualizarInteres'),
+	path('ListaExamenes', ListaExamenes.as_view(), name='ListaExamenes'),
+	path('ExamenTomado', ExamenTomado.as_view(), name='ExamenTomado'),
+	path('jugar', jugar.as_view(), name='jugar'),
+
 
 
 ]
