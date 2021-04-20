@@ -30,7 +30,7 @@ class PersonalRegistro(CreateView):
 	def form_valid(self, form):
 		usuario = form.save()
 		login(self.request, usuario)
-		return redirect('')
+		return redirect('ListaExamenes')
 
 
 class ActualizarInteres(UpdateView):
