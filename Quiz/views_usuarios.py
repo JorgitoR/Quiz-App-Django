@@ -120,7 +120,7 @@ def  jugar(request, quiz):
 
 	}
 
-	return render(request, '', context)
+	return render(request, 'tablero/personal/jugar.html', context)
 
 
 
