@@ -77,15 +77,15 @@ class ExamenTomado(ListView):
 
 
 
-def  jugar(request, quiz):
-	quiz = get_object_or_404(Examen, pk=quiz)
+def  jugar(request, quiz_id):
+	quiz = get_object_or_404(Examen, pk=quiz_id)
 	estudiante = request.user.examenusuario
 
-	if estudiante.examenes.filter(pk=quiz).exists():
+	if estudiante.examenes.filter(pk=quiz_id).exists():
 		return render(request, 'tablero/personal/jugar.html')
 
 
-	total_preguntas = estudiante.examenes.preguntas.count()
+	total_preguntas = quiz.preguntas.count()
 	preguntas_sin_responder = estudiante.get_preguntas_sin_respuestas(quiz)
 	total_preguntas_sin_responder = preguntas_sin_responder.count()
 	barra_de_progreso = 100 - round(((total_preguntas_sin_responder - 1) / total_preguntas)*100)

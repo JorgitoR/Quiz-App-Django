@@ -21,7 +21,7 @@ class Categoria(models.Model):
 	def get_html_badge(self):
 		nombre = escape(self.nombre)
 		color = escape(self.color)
-		html = "<span style='background:%s'>%s</span>" %(color, nombre)
+		html = "<span class='span_badge' style='background:%s'>%s</span>" %(color, nombre)
 		return mark_safe(html)
 
 class Examen(models.Model):
