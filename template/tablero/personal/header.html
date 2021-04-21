@@ -1,0 +1,21 @@
+<h2>
+	Examenes
+</h2>
+<p class="text-muted">
+	Categorias: {% for categoria in user.examenusuario.categorias.all %}{{categoria.get_html_badge}}{% endfor %}
+	<a href=""><small>(Actualizar Interes)</small></a>
+</p>
+
+
+<ul class="nav nav-tabs mb-3">
+	<li class="nav-item">
+		<a href="">
+			Nuevo
+		</a>
+	</li>
+	<li class="nav-item">
+		<a href="">
+			Tomado
+		</a>
+	</li>
+</ul>

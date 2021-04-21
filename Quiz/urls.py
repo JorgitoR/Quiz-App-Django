@@ -48,7 +48,7 @@ urlpatterns = [
 	path('ActualizarInteres', ActualizarInteres.as_view(), name='ActualizarInteres'),
 	path('ListaExamenes', ListaExamenes.as_view(), name='ListaExamenes'),
 	path('ExamenTomado', ExamenTomado.as_view(), name='ExamenTomado'),
-	path('jugar', jugar.as_view(), name='jugar'),
+	path('jugar', jugar, name='jugar'),
 
 
 

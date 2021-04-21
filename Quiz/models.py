@@ -18,6 +18,12 @@ class Categoria(models.Model):
 	def __str__(self):
 		return self.nombre
 
+	def get_html_badge(self):
+		nombre = escape(self.nombre)
+		color = escape(self.color)
+		html = "<span style='background:%s'>%s</span>" %(color, nombre)
+		return mark_safe(html)
+
 class Examen(models.Model):
 	usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='examen')
 	nombre = models.TextField(verbose_name='Nombre del Examen')

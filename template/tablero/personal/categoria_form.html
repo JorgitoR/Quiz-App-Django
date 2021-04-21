@@ -2,4 +2,16 @@
 
 {% block contenido %}
 
+<h2 class="mb-3">
+	Actualizar tus intereses
+</h2>
+
+<form method="POST" novalidate="">
+	{% csrf_token %}
+	{{form|crispy}}
+	<button type="submit" class="btn bt-success">
+		Guardar Cambios
+	</button>
+</form>
+
 {% endblock %}
