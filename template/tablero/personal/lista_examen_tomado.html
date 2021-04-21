@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+	{% include 'tablero/personal/header.html' %}
+
+	<div class="card">
+		<table class="table mb-0">
+			<thead>
+				<tr>
+					<th>Examen</th>
+					<th>Categoria</th>
+					<th>Puntaje</th>
+				</tr>
+			</thead>
+		</table>
+		<tbody>
+			{% for examen_tomado in examen_tomado %}
+			<tr>
+				<td>{{examen_tomado.examen.nombre}}</td>
+				<td>{{examen_tomado.examen.categoria.get_html_badge}}</td>
+				<td>{{examen_tomado.puntaje}}</td>
+			</tr>
+			{% empty %}
+			<tr>
+				<td class="bg-light text-ceneter font-italic" colspan="3">
+					Aun no has completado algun examen
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</div>
 
 {% endblock %}
