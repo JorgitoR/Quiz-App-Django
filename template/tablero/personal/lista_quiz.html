@@ -2,6 +2,35 @@
 
 {% block contenido %}
 
-
-
+{% include 'personal/header.html' %}
+<div class="card">
+	<table class="table mb-0">
+		<thead>
+			<tr>
+				<th>Examen</th>
+				<th>Categoria</th>
+				<th>Tamaño</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for examen in examenes %}
+				<tr>
+					<td class="align-middle">{{examen.nombre}}</td>
+					<td class="align-middle">{{examen.categoria.get_html_badge}}</td>
+					<td class="align-middle">{{examen.preguntas__count}} preguntas</td>
+					<td class="text-rigth">
+						<a href="{% url 'jugar' examen.pk %}">Comenzar Examen</a>
+					</td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td class="bg-light text-center font-italic" colspan="4">
+						No hay examenes que concuerden con tus interes
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
 {% endblock %}

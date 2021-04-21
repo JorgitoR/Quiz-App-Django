@@ -9,12 +9,12 @@
 
 <ul class="nav nav-tabs mb-3">
 	<li class="nav-item">
-		<a href="">
+		<a class="nav-link{% if active == 'nuevo' %}active{% endif %}" href="{% url 'ListaExamenes' %}">
 			Nuevo
 		</a>
 	</li>
 	<li class="nav-item">
-		<a href="">
+		<a class="nav-link{% if active == 'tomado' %}active{% endif %}" href="{% url 'ExamenTomado' %}">
 			Tomado
 		</a>
 	</li>
