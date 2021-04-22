@@ -1,5 +1,29 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block contenido %}
+
+<div class="progress mg-3">
+	<div class="progress-bar" 
+		 role="progressbar" 
+		 aria-valuenow="{{progreso}}"
+		 aria-valuemin="0"
+		 aria-valuemax="100"
+		 style="width: {{ progress }}%" 
+	>	
+		
+	</div>
+</div>
+
+<h2 class="mb-3">{{quiz.nombre}}</h2>
+<p class="lead">{{pregunta.texto}}</p>
+<form method="post" novalidate="">
+	{% csrf_token %}
+	{{form.as_p}}
+	<button type="submit">
+		Siguiente
+	</button>
+</form>
 
 {% endblock %}

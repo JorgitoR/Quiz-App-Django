@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Categoria,  Examen, Pregunta
+from .models import Categoria,  Examen, Pregunta, Usuario
 from .models import Respuesta, ExamenUsuario, ExamenTomado, RespuestaUsuario
 
 
@@ -24,3 +24,5 @@ admin.site.register(ExamenUsuario)
 admin.site.register(ExamenTomado)
 admin.site.register(Examen)
 admin.site.register(Categoria)
+admin.site.register(Usuario)
+admin.site.register(RespuestaUsuario)

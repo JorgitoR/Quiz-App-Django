@@ -6,8 +6,6 @@ from .models import (Usuario, Examen, Categoria, Pregunta, Respuesta,
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.utils import ValidationError
 
-
-
 class AddPreguntaForm(forms.ModelForm):
 	class Meta:
 		model = Pregunta

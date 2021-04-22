@@ -10,6 +10,7 @@
 				<th>Examen</th>
 				<th>Categoria</th>
 				<th>Tamaño</th>
+				<th>Creador</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -19,6 +20,7 @@
 					<td class="align-middle">{{examen.nombre}}</td>
 					<td class="align-middle">{{examen.categoria.get_html_badge}}</td>
 					<td class="align-middle">{{examen.preguntas__count}} preguntas</td>
+					<td class="align-middle">{{examen.usuario.username}}</td>
 					<td class="text-rigth">
 						<a href="{% url 'jugar' examen.pk %}">Comenzar Examen</a>
 					</td>

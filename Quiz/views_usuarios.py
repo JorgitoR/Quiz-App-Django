@@ -63,7 +63,7 @@ class ListaExamenes(ListView):
 		return queryset
 
 
-class ExamenTomado(ListView):
+class ExamenTaken(ListView):
 	model = ExamenTomado
 	context_object_name = 'examen_tomado'
 	template_name = 'tablero/personal/lista_examen_tomado.html'
@@ -97,15 +97,15 @@ def  jugar(request, quiz_id):
 		if form.is_valid():
 			with transaction.atomic():
 				instance = form.save(commit=False)
-				instance.quizuser = estudiante
+				instance.quizUser = estudiante
 				instance.save()
 
 				if estudiante.get_preguntas_sin_respuestas(quiz):
-					return redirect('jugar', pk)
+					return redirect('jugar', quiz.pk)
 				else:
 					respuesta_correcta = estudiante.respuesa_examen.filter(respuesta__pregunta__examen=quiz, respuesta__correcta=True).count()
-					puntaje = round((respuesta__correcta / total_preguntas) * 100)
-					ExamenTomado.objects.create(quizuser=estudiante, examen=quiz, puntaje=puntaje)
+					puntaje = round((respuesta_correcta / total_preguntas) * 100)
+					ExamenTomado.objects.create(quizUser=estudiante, examen=quiz, puntaje=puntaje)
 					if puntaje < 50.0:
 						messages.warning(request, 'Mejor suerte la proxima vez! Tu puntaje para el Quiz %s  fue %s' %(quiz.nombre, puntaje))
 					else:
@@ -117,7 +117,10 @@ def  jugar(request, quiz_id):
 		form = TomarQuizForm(pregunta=pregunta)
 
 	context = {
-
+		'quiz':quiz,
+		'form':form,
+		'pregunta':pregunta,
+		'progress':barra_de_progreso
 	}
 
 	return render(request, 'tablero/personal/jugar.html', context)

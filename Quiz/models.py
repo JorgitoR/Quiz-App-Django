@@ -79,3 +79,6 @@ class ExamenTomado(models.Model):
 class RespuestaUsuario(models.Model):
 	quizUser = models.ForeignKey(ExamenUsuario, on_delete=models.CASCADE, related_name='respuesa_examen')
 	respuesta = models.ForeignKey(Respuesta, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return 'Usuario {} respuesta {}'.format(self.quizUser.usuario.username, self.respuesta)

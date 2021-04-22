@@ -130,8 +130,8 @@ class ExamenResultado(DeleteView):
 
 	def get_context_data(self, **kwargs):
 		examen = self.get_object()
-		examenes_tomados = examen.examen_tomado.select_related('quizuser__usuario').order_by('nombre')
-		total_examenes_tomados = examen_tomado.count()
+		examenes_tomados = examen.examen_tomado.select_related('quizUser__usuario').order_by('-fecha')
+		total_examenes_tomados = examenes_tomados.count()
 		examen_puntaje = examen.examen_tomado.aggregate(average_score=Avg('puntaje'))
 
 		dicionario_extra = {
